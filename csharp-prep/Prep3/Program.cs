@@ -4,10 +4,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        
-        
-        
-        
         int guess;
         int guessCount = 0;
         string again = "yes";
