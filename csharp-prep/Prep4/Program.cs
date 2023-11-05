@@ -24,6 +24,7 @@ class Program
                 larguest = number;
             }            
         }
+
         Console.WriteLine($"The sum is {sum}");
         Console.WriteLine($"The average is {average}");
         Console.WriteLine($"The larguest number is {larguest}");
