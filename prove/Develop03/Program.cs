@@ -46,7 +46,7 @@ class Program
     static void HideRandomWords(Scripture scripture)
     {
         Random random = new Random();
-        List<Word> visibleWords = scripture.Words.Where(w => !w.IsHidden).ToList();
+        List<Word> visibleWords = scripture.Words.Where(w => !w.hidden).ToList();
 
         if (visibleWords.Count > 0)
         {
