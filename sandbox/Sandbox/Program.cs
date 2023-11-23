@@ -3,31 +3,20 @@ using System;
 class Program
 {
     static void Main(string[] args)
-    {
-        string escritura = "Escritura";
-        Console.WriteLine(escritura);
-        Console.WriteLine("Type continue if you want to continue or end if you want to quit");
-        string hola = Console.ReadLine();
-        if (hola == " "){
-        foreach (var item in escritura)
-        {
-            
-        }
-        Random rand = new Random();
-        int index = rand.Next(escritura.Count);
-        string hey = escritura[index];
-        
-        Console.Clear();
-        Console.WriteLine("Hola soy lily");
-        }
-        else {
-            Console.Clear();
-            Console.WriteLine("Thanks for playing");
+    {   // en este caso no usamos set al poner get pq utilizamos un constructor para
+    // obtener los datos necesairos para el programa
+    // esto tambien se puede hacer con set al asigna un variable al atributo del objeto que queeremos
+    // cmbiar
+    // como poner stuident.SetName("Here wegoagain");
+    //student.SetNumber("hola bebe");
 
-        }
+        Student student = new Student("Maria", "Inga");
+        string name = student.GetName();
+        string number = student.GetNumber();
+Console.WriteLine(name);
+Console.WriteLine(number);
+        Console.WriteLine(student.GetStudentInfo());
 
-        
-        
 
     }
 }
