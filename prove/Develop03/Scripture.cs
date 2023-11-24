@@ -1,57 +1,72 @@
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+/// <summary>
+/// The class scripture will hide random words and get
+/// the display text as a string it also has a behavior
+/// to check is the scripture is completely hidden.
+/// </summary>
+class Scripture{
 
-class Scripture
-{ 
-    //this is a get vamos a obtener reference
-    public string Reference { 
-        get; 
-        }
-    //LIST
-    //se declara una lista llamada words
-    // esta lista es una lista de objetos Word.cs
-    private List<Word> words;
+    //Variables
 
-    //CONSTRUCTOR
-    //creamos un constructor el cual pasara reference como string y texto 
-    //de esta manera pasamos de frente reference y text. 
-    //Reference sera el nombre de la escritura y text la escritura
-    public Scripture(string reference, string text)
-    {
-        Reference = reference;
-        InitializeWords(text);
-    }
-    //METODOS:
+    Reference _reference;  //luego de llamar constructor reference llamamos a este
+    private List<Word> _words;
 
-    //creamos un metodo (funcion) q acepta como parametro text (TEXTO DE LA ESCRITURA)
-    private void InitializeWords(string text)
-    {   //vamos a dividir cada palabra de texto y lo almacenaremos en una lista llamada wordArray
+    //Constructors
+    // Parece que los constructores pueden obtener
+    //info si esta aun asi no esta declarada como variable
+    //en la clase y usarla en el constructor como text
+    public Scripture( Reference reference, string text){
+        _reference = reference;
+        //guardando en wordArray el texto separado
         string[] wordArray = text.Split(' ');
-        //se incicializa words, con la capacidad de la cantidad de palabras del texto.
-        words = new List<Word>(wordArray.Length);
+        //parametro de longitud
+        _words = new List<Word>(wordArray.Length);
+
+        foreach(string word in wordArray){
+            ///En esta parte por cada word en la lista wordArray
+            ///añadimos a la lista words objetos Word 
+            _words.Add(new Word(word));
+        }
+
+    }
+
+    // methods
+    public void HideRandomWords( int numberToHide ){
+        //this will create an instance of random class (choose random)
+        Random random = new Random();
+        // create a foor loop whic will iterate 
+        for (int i = 0; i < numberToHide; i++)
+        {
+            int index = random.Next(_words.Count);
+            _words[index].Hide();
+        }
         
-        //para cada palabra en wordArray añadir una nueva instancia de word en la lista words 
-        foreach (string word in wordArray)
-        {   // le añadimos a la lista words cada objeto que se cree por palabra
 
-            words.Add(new Word(word));
+    }
+    public string GetDisplayText(){
+        List <string> displayTextList = new List<string> ();
+        foreach (Word word in _words)
+        {
+            displayTextList.Add(word.GetDisplayText());
         }
+        
+        return string.Join(" ", displayTextList);
+    }
+        
+    public bool IsCompletelyHidden(){
+
+        foreach(Word word in _words){
+            if (!word.IsHidden()){
+                return false;
+            }
+        }
+        return true;
+
+    }
+    public override string ToString()
+    {
+        return $"{_reference.GetDisplayText()} - {GetDisplayText()}";
     }
 
-
-    //creamos otro metodo que no tiene ningun parametro pero se encarga
-    //de reemplazar words por underscore
-    public string GetVisibleText()
-    {   //string.Join para concatenar el texto de cada objeto Word
-        // 
-        return string.Join(" ", words.Select(w => w.hidden ? "_____" : w.Text));
-    }
-
-    public bool AllWordsHidden => words.All(w => w.hidden);
-     
-    //Al llamar a esta lista tendremos acceso a words 
-    public List<Word> Words {
-        get { 
-          return words;
-        }
-
-}
 }

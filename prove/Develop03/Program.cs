@@ -1,58 +1,31 @@
 using System;
+using System.Linq.Expressions;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Creamos una nueva instancia de scripture, la cual fue pasada en scripture.cs
-        //como un constructor con dos tipo de data: la referencia y la escritura
-        Scripture scripture = new Scripture("John 3:16", "For God so loved the world...");
-
-        // Display the complete scripture
-        DisplayScripture(scripture);
-
-        // Prompt the user to press enter or type quit
-        while (true)
-        {
-            Console.WriteLine("Press Enter to continue or type 'quit' to exit:");
-            string input = Console.ReadLine();
-
-            if (string.Equals(input, "quit", StringComparison.OrdinalIgnoreCase))
-            {
+        // First constructor which has the reference of the scripture
+        Reference reference = new Reference("John", 3 , 16 );
+        Scripture scripture = new Scripture(reference, "In god we believe");
+        Console.WriteLine(scripture);
+        while (true){
+            Console.WriteLine("Press enter to continue or type quit to leave.");
+            string user = Console.ReadLine();
+            if (user == "quit"){
                 break;
             }
+            scripture.HideRandomWords(2);
+            Console.WriteLine(scripture.GetDisplayText());
 
-            // Hide random words
-            HideRandomWords(scripture);
-
-            // Display the modified scripture
-            DisplayScripture(scripture);
-
-            if (scripture.AllWordsHidden)
-            {
-                Console.WriteLine("All words hidden. Press Enter to exit.");
+            if (scripture.IsCompletelyHidden()){
+                Console.WriteLine("All words are hidden.");
                 break;
+
             }
+
         }
     }
 
-    static void DisplayScripture(Scripture scripture)
-    {
-        Console.Clear();
-        Console.WriteLine($"Scripture: {scripture.Reference}");
-        Console.WriteLine(scripture.GetVisibleText());
-    }
-
-    static void HideRandomWords(Scripture scripture)
-    {
-        Random random = new Random();
-        List<Word> visibleWords = scripture.Words.Where(w => !w.hidden).ToList();
-
-        if (visibleWords.Count > 0)
-        {
-            Word wordToHide = visibleWords[random.Next(visibleWords.Count)];
-            wordToHide.Hide();
-        }
-    }
 }
     
