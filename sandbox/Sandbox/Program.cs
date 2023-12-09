@@ -3,20 +3,26 @@ using System;
 class Program
 {
     static void Main(string[] args)
-    {   // en este caso no usamos set al poner get pq utilizamos un constructor para
-    // obtener los datos necesairos para el programa
-    // esto tambien se puede hacer con set al asigna un variable al atributo del objeto que queeremos
-    // cmbiar
-    // como poner stuident.SetName("Here wegoagain");
-    //student.SetNumber("hola bebe");
+    {
+        HourlyEmployee hEmployee = new HourlyEmployee();
+        hEmployee.SetName("John");
+        hEmployee.SetIdNumber("123");
+        hEmployee.SetPayRate(129);
+        hEmployee.SetHoursWorked(12);
 
-        Student student = new Student("Maria", "Inga");
-        string name = student.GetName();
-        string number = student.GetNumber();
-Console.WriteLine(name);
-Console.WriteLine(number);
-        Console.WriteLine(student.GetStudentInfo());
+        SalaryEmployee sEmployee = new SalaryEmployee();
+        sEmployee.SetName("EMELWAI");
+        sEmployee.SetIdNumber("123");
+        sEmployee.SetSalary(123);
+
+        //we call a function 
+        DisplayEmployeeInformation(hEmployee);
+        DisplayEmployeeInformation(sEmployee);
 
 
     }
+    //CREAMOS UNA FUNCION
+     public static void DisplayEmployeeInformation(Employee employee){ //tipo de funcion employee y parametro employee
+        Console.WriteLine($"{employee.GetName()}");
+     }
 }

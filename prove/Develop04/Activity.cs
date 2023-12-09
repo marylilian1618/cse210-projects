@@ -1,15 +1,17 @@
 class Activity
-{
+{   //variables
     private string _name;
     private string _description;
     private int _duration;
 
+    //constructo sin parametros 
     public Activity()
-    {
+    {   // le damos valores a las variables
         _name = "Activity";
         _description = "Generic activity description.";
     }
 
+    // metodo run que llama a los metodos que estan mas abajito :D
     public virtual void Run()
     {
         DisplayStartingMessage();
@@ -17,10 +19,12 @@ class Activity
     }
 
     public void DisplayStartingMessage()
-    {
+    {   //Se escribe en la consola el nombre y la descripcion
         Console.WriteLine($"Starting {_name} - {_description}");
+        // duration toma el valor de get duration que es un metodo que esta mas abajito :D
         _duration = GetDuration();
         Console.WriteLine($"Prepare to begin. Starting in {3} seconds.");
+        //llama al metodo show countdown que mostrara una cuenta regresiva
         ShowCountDown(3);
     }
 
