@@ -20,6 +20,7 @@ class Program
         video3.AddComment("Loki", "I am hungry right now");
 
         List<Video> videoList = new List<Video> { video1, video2, video3 };
+        
         foreach (Video video in videoList)
         {
             Console.WriteLine($"Title: {video.GetTitle()}");
